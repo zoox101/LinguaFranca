@@ -1,16 +1,18 @@
 
 public class SuperPointer {
 	
-	GraphObject graphobject;
-	String type;
+	Noun in;
+	Noun out;
+	Verb verb;
 	
-	SuperPointer(GraphObject graphobject, String type) {
-		this.graphobject = graphobject;
-		this.type = type; 
+	SuperPointer(Noun in, Verb verb, Noun out) {
+		this.in = in;
+		this.verb = verb; 
+		this.out = out;
 	}
 	
 	public String toString() {
-		return type + ": " + graphobject.name;
+		return verb + ": " + out.name;
 	}
 
 }
