@@ -32,6 +32,9 @@ public class Verb {
 		if(that instanceof Verb)
 			if(this.is((Verb)that))
 				return true;
+		if(that instanceof String)
+			if(this.is((String) that))
+					return true;
 		return false;
 	}
 

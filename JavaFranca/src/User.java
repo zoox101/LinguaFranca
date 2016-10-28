@@ -112,7 +112,7 @@ public class User {
 	 */
 	public static boolean getBoolean(String input) {
 		String userinput = get(input).toLowerCase();
-		if(userinput.charAt(0) == 'y') return true;
+		if(userinput.length() != 0 && userinput.charAt(0) == 'y') return true;
 		else return false;
 	}
 	

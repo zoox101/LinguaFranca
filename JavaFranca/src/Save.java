@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Save {
 	
-	public static void graphToFile(String filename) throws IOException {
+	public static void toFile(String filename) throws IOException {
 		
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename, false));
 		
@@ -25,7 +25,7 @@ public class Save {
 		writer.close();
 	}
 	
-	public static void graphFromFile(String filename) throws IOException {
+	public static void fromFile(String filename) throws IOException {
 		
 		BufferedReader reader = new BufferedReader(new FileReader(filename));
 		

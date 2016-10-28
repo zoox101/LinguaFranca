@@ -1,17 +1,71 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 @SuppressWarnings("unused")
 public class ZZZTest {
 	
+	//Algorithm
+	//Remove all verbs
+	
 	public static void main(String[] args) throws IOException {
 		
+		Save.fromFile("megafile.txt");
+		BufferedReader reader = new BufferedReader(new FileReader("Bonaparte.txt"));
 		
+		ArrayList<String> fragments = new ArrayList<String>();
+		String line; String word; String fragment = ""; 
+		while((line = reader.readLine()) != null) {
+			String[] split = line.split(" ");
+			for(int i=0; i<split.length; i++) {
+				if(Verb.all.containsKey(split[i])) {
+					fragments.add(fragment);
+					fragment = "";
+				}
+				else fragment += (split[i] + " ");
+			}
+		}
 		
+		reader.close();
+		for(String string: fragments)
+			System.out.println(string);
+		
+	}
+	
+	static void verbHunt(String filein, String fileout) throws IOException {
+		
+		BufferedReader reader = new BufferedReader(new FileReader(filein));
+		
+		HashSet<String> verbs = new HashSet<String>();
+		String line; 
+		while((line = reader.readLine()) != null) {
+			String[] split = line.split(" ");
+			for(int i=0; i<split.length; i++) {
+				if(Verb.all.containsKey(split[i]));
+				else if(verbs.contains(split[i]));
+				else if(User.getBoolean(split[i] + " "))
+					verbs.add(split[i]);
+			}
+		}
+		
+		System.out.println("Confirm Verbs");
+		ArrayList<String> verbarraylist = new ArrayList<String>();
+		verbarraylist.addAll(verbs);
+		ArrayList<String >checked = new ArrayList<String>();
+		for(String string: verbarraylist)
+			if(User.getBoolean(string + " "))
+				checked.add(string);
+		for(String string: checked)
+			new Verb(string);
+		
+		Save.toFile(fileout);
+		reader.close();
 	}
 	
 	static void connect(String subject, String verb, String object) {
