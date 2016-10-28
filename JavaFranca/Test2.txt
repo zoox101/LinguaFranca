@@ -1,0 +1,12 @@
+VERBS
+are
+made
+is
+inspired
+
+NOUNS
+album
+band
+
+POINTERS
+band - made - album
