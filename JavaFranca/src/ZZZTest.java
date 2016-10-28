@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 @SuppressWarnings("unused")
 public class ZZZTest {
@@ -17,27 +19,70 @@ public class ZZZTest {
 	public static void main(String[] args) throws IOException {
 		
 		Save.fromFile("megafile.txt");
+		
 		BufferedReader reader = new BufferedReader(new FileReader("Bonaparte.txt"));
+		ArrayList<String> strings = new ArrayList<String>(); String line;
+		while((line = reader.readLine()) != null) strings.add(line); reader.close();
 		
-		ArrayList<String> fragments = new ArrayList<String>();
-		String line; String word; String fragment = ""; 
-		while((line = reader.readLine()) != null) {
-			String[] split = line.split(" ");
-			for(int i=0; i<split.length; i++) {
-				if(Verb.all.containsKey(split[i])) {
-					fragments.add(fragment);
-					fragment = "";
-				}
-				else fragment += (split[i] + " ");
-			}
+		strings = split(strings, "\\.");
+		strings = split(strings, ",");
+		
+		ArrayList<String> stringstemp = new ArrayList<String>();
+		for(String string: strings) {
+			if(contains(string, Verb.all.keySet()))
+				stringstemp.add(string.toLowerCase().trim());
 		}
+		strings = stringstemp;
 		
-		reader.close();
-		for(String string: fragments)
+		//strings = split(strings, Verb.all.keySet());
+
+		
+		
+		for(String string: strings)
 			System.out.println(string);
+		
 		
 	}
 	
+	static boolean contains(String string, Set<String> set) {
+		String[] split = string.split(" ");
+		for(int i=0; i<split.length; i++)
+			if(set.contains(split[i]))
+				return true;
+		return false;
+	}
+	
+	static ArrayList<String> split(ArrayList<String> strings, String splitstring) throws IOException {
+		ArrayList<String> outputs = new ArrayList<String>();
+		for(String string: strings) {
+			String[] split = string.split(splitstring);
+			for(int i=0; i<split.length; i++)
+				outputs.add(split[i]);
+		}
+		return outputs;
+	}
+	
+	static ArrayList<String> split(ArrayList<String> strings, Set<String> collection) throws IOException {
+		
+		ArrayList<String> fragments = new ArrayList<String>();
+		String line; String word; String fragment = ""; 
+		for(int i=0; i<strings.size(); i++) {
+			fragment = "";
+			line = strings.get(i);
+			String[] split = line.split(" ");
+			for(int j=0; j<split.length; j++) {
+				if(collection.contains(split[j])) {
+					fragments.add(fragment);
+					fragment = "";
+				}
+				else fragment += (split[j] + " ");
+			}
+			fragments.add(fragment);
+		}
+		return fragments;
+	}
+	
+	//Manual
 	static void verbHunt(String filein, String fileout) throws IOException {
 		
 		BufferedReader reader = new BufferedReader(new FileReader(filein));
