@@ -1,3 +1,4 @@
+package GraphStructure;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import ThoughtDivision.Thought;
 
 @SuppressWarnings("unused")
 public class ZZZTest {
@@ -24,9 +27,11 @@ public class ZZZTest {
 		ArrayList<String> strings = new ArrayList<String>(); String line;
 		while((line = reader.readLine()) != null) strings.add(line); reader.close();
 		
+		//Splitting the paragraph by sentences and by commas
 		strings = split(strings, "\\.");
 		strings = split(strings, ",");
 		
+		//Removing all dependent clauses
 		ArrayList<String> stringstemp = new ArrayList<String>();
 		for(String string: strings) {
 			if(contains(string, Verb.all.keySet()))
@@ -34,13 +39,12 @@ public class ZZZTest {
 		}
 		strings = stringstemp;
 		
-		//strings = split(strings, Verb.all.keySet());
-
-		
-		
-		for(String string: strings)
-			System.out.println(string);
-		
+		//
+		for(String string: strings) {
+			Thought thought = new Thought(string);
+			if(thought.size() < 4)
+				System.out.println(thought);
+		}		
 		
 	}
 	
@@ -60,26 +64,6 @@ public class ZZZTest {
 				outputs.add(split[i]);
 		}
 		return outputs;
-	}
-	
-	static ArrayList<String> split(ArrayList<String> strings, Set<String> collection) throws IOException {
-		
-		ArrayList<String> fragments = new ArrayList<String>();
-		String line; String word; String fragment = ""; 
-		for(int i=0; i<strings.size(); i++) {
-			fragment = "";
-			line = strings.get(i);
-			String[] split = line.split(" ");
-			for(int j=0; j<split.length; j++) {
-				if(collection.contains(split[j])) {
-					fragments.add(fragment);
-					fragment = "";
-				}
-				else fragment += (split[j] + " ");
-			}
-			fragments.add(fragment);
-		}
-		return fragments;
 	}
 	
 	//Manual

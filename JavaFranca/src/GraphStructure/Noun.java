@@ -1,3 +1,4 @@
+package GraphStructure;
 import java.util.ArrayList;
 import java.util.HashMap;
 

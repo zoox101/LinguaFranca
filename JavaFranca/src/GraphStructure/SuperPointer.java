@@ -1,3 +1,4 @@
+package GraphStructure;
 
 public class SuperPointer {
 	

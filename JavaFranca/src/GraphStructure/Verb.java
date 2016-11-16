@@ -1,3 +1,4 @@
+package GraphStructure;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,25 +17,18 @@ public class Verb {
 		all.put(this.name, this);
 	}
 	
-	public boolean is(String that) {
+	public String toString() {return name;}
+	
+	public boolean equals(Object that) {
+		if(that instanceof Verb) if(this.is((Verb)that)) return true;
+		if(that instanceof String) if(this.is((String) that)) return true;
+		return false;}
+	private boolean is(Verb that) {return this.is(that.name);}
+	private boolean is(String that) {
 		if(this.name.equals(that)) return true;
 		for(ArrayList<String> tense: tenses)
 			if(tense.contains(that))
 				return true;
-		return false;
-	}
-	
-	public boolean is(Verb that) {return this.is(that.name);}
-	
-	public String toString() {return name;}
-	
-	public boolean equals(Object that) {
-		if(that instanceof Verb)
-			if(this.is((Verb)that))
-				return true;
-		if(that instanceof String)
-			if(this.is((String) that))
-					return true;
 		return false;
 	}
 
