@@ -1,14 +1,48 @@
 package ResponseModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import GraphStructure.GraphObject;
-import GraphStructure.Noun;
 import GraphStructure.Relation;
-import GraphStructure.Verb;
 
 public class SimpleQuery {
 	
+	public SimpleQuery(String string) {
+		
+		String[] keys = string.toLowerCase().trim().split(" ");
+		ArrayList<GraphObject> objects = new ArrayList<GraphObject>();
+		for(int i=0; i<keys.length; i++)
+			if(GraphObject.all.containsKey(keys[i]))
+				objects.add(GraphObject.all.get(keys[i]));
+		
+		HashMap<GraphObject, Integer> tally = new HashMap<GraphObject, Integer>();
+		for(GraphObject object: objects) {
+			ArrayList<GraphObject> synonyms = object.queryOut(Relation.UUU, null);
+			for(GraphObject synonym: synonyms) {
+				if(!tally.containsKey(synonym)) tally.put(synonym, 1);
+				else tally.put(synonym, tally.get(synonym)+1);
+			}
+		}
+		
+		GraphObject maxobject = null; int max = 0;
+		for(GraphObject key: tally.keySet()) {
+			if(tally.get(key) > max) {
+				maxobject = key;
+				max = tally.get(key);
+			}
+		}
+		
+		System.out.println(max);
+		System.out.println(maxobject + " -- " + maxobject.in + " -- " + maxobject.out );
+		
+		GraphObject thought = maxobject.getOut(Relation.OBJ).get(0);
+		GraphObject subject = thought.getIn(Relation.SUBJ).get(0);
+		System.out.println(subject.queryIn(Relation.UUU, null));
+		
+	}
+	
+	/*
 	//In the form of Who Verb Object
 	public SimpleQuery(String string) {
 		
@@ -39,5 +73,6 @@ public class SimpleQuery {
 		else System.out.println("Unknown");
 		
 	}
+	*/
 
 }

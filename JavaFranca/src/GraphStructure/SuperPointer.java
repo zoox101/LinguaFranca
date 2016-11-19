@@ -13,7 +13,7 @@ public class SuperPointer {
 	}
 	
 	public String toString() {
-		return relation + ": " + out.name;
+		return relation + ":" + in.name + "->" + out.name;
 	}
 	
 }

@@ -6,6 +6,7 @@ public class GraphObject {
 
 	//Stores all graph objects
 	public static HashMap<String, GraphObject> all = new HashMap<String, GraphObject>();
+	public static HashMap<Integer, GraphObject> allid = new HashMap<Integer, GraphObject>();
 	public static int idtotal = 0;
 
 	public ArrayList<SuperPointer> in; public ArrayList<SuperPointer> out;
@@ -18,6 +19,7 @@ public class GraphObject {
 		this.out = new ArrayList<SuperPointer>();
 		this.id = idtotal++;
 		all.put(this.name, this);
+		allid.put(this.id, this);
 	}
 
 	//Default Constructor -- Used for unnamed graph objects
@@ -54,6 +56,26 @@ public class GraphObject {
 			if(pointer.relation == relation)
 				outputs.add(pointer.out);
 		return outputs;
+	}
+	
+	//Recursive method that finds all nodes connected by the given relation
+		public ArrayList<GraphObject> queryIn(Relation relation, ArrayList<GraphObject> objects) {
+			if(objects == null) objects = new ArrayList<GraphObject>();
+			objects.add(this);
+			for (SuperPointer pointer: this.in)
+				if(pointer.relation == relation)
+					objects = pointer.in.queryIn(relation, objects);
+			return objects;
+		}
+	
+	//Recursive method that finds all nodes connected by the given relation
+	public ArrayList<GraphObject> queryOut(Relation relation, ArrayList<GraphObject> objects) {
+		if(objects == null) objects = new ArrayList<GraphObject>();
+		objects.add(this);
+		for (SuperPointer pointer: this.out)
+			if(pointer.relation == relation)
+				objects = pointer.out.queryOut(relation, objects);
+		return objects;
 	}
 
 	//Decides if two graph objects are equal

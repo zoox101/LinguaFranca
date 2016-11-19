@@ -3,20 +3,33 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import GraphStructure.GraphObject;
-import GraphStructure.Noun;
 import GraphStructure.Relation;
 import GraphStructure.Verb;
 
 public class Parse {
+	
+	static ArrayList<String> pronouns;
+	static ArrayList<String> badwords;
+	static GraphObject subject;
 
 	public Parse(ArrayList<String> strings) {
+		
+		pronouns = new ArrayList<String>();
+		pronouns.add("he");
+		pronouns.add("his");
+		
+		badwords = new ArrayList<String>();
+		badwords.add("the");
+		badwords.add("of");
 
 		//Splitting the paragraph by sentences and by commas
 		strings = split(strings, "\\.");
 		strings = split(strings, ",");
 
+		ArrayList<String> stringstemp;
+		
 		//Removing all dependent clauses
-		ArrayList<String> stringstemp = new ArrayList<String>();
+		stringstemp = new ArrayList<String>();
 		for(String string: strings) {
 			if(contains(string, Verb.all.keySet()))
 				stringstemp.add(string);
@@ -28,24 +41,38 @@ public class Parse {
 			thought.addAll(Parse.split(string, Verb.all.keySet()));
 			//If the sentence only contains one verb...
 			if(thought.size() == 3) {
+				System.out.println(thought);
 				GraphObject object = GraphObject.create();
-				superNoun(thought.get(0), Relation.SUBJ, object);
+				subject = superNoun(thought.get(0), Relation.SUBJ, object);
 				superVerb(thought.get(1), object);
 				superNoun(thought.get(2), Relation.OBJ, object);
 			}
 		}
 	}
 
-	//TODO: Add actual parsing here
-	static Noun superNoun(String string, Relation relation, GraphObject object) {
-		Noun noun = Noun.create(string);
+	//TODO: Add more actual parsing here
+	static GraphObject superNoun(String string, Relation relation, GraphObject object) {
+		GraphObject noun = GraphObject.create();
+		String[] strings = string.split(" ");
+		for(int i=0; i<strings.length; i++) {
+			GraphObject subnoun;
+			if(pronouns.contains(strings[i])){ 
+				subnoun = subject;
+				subnoun.addConnection(Relation.UUU, noun);
+			}
+			else if(badwords.contains(strings[i]));
+			else{
+				subnoun = GraphObject.create(strings[i]);
+				subnoun.addConnection(Relation.UUU, noun);
+			}
+		}
 		noun.addConnection(relation, object);
 		return noun;
 	}
 	
 	//TODO: Add actual parsing here
-	static Verb superVerb(String string, GraphObject object) {
-		Verb verb = Verb.create(string);
+	static GraphObject superVerb(String string, GraphObject object) {
+		GraphObject verb = GraphObject.create(string);
 		verb.addConnection(Relation.VERB, object);
 		return verb;
 	}

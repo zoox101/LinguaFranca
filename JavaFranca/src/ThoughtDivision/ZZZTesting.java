@@ -5,9 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import GraphStructure.GraphObject;
+import GraphStructure.Relation;
 import ResponseModel.SimpleQuery;
 import ZZZOld.User;
 
+@SuppressWarnings("unused")
 public class ZZZTesting {
 	
 	static String FILENAME = "Data/Bonaparte.txt";
@@ -22,8 +25,28 @@ public class ZZZTesting {
 		reader.close();
 		new Parse(strings);
 		
-		//new SimpleQuery("who became important under the first french republic");
-		new SimpleQuery(User.getString("Enter Query: ").toLowerCase());
+		
+		
+		// TEMPORARY TESTING STUFF
+		GraphObject object;
+		
+		/*
+		object = GraphObject.allid.get(44);
+		System.out.println(object + " -- " + object.out + " -- " + object.in);
+		object = GraphObject.allid.get(42);
+		System.out.println(object + " -- " + object.out + " -- " + object.in);
+		object = GraphObject.allid.get(43);
+		System.out.println(object + " -- " + object.out + " -- " + object.in);
+		object = GraphObject.allid.get(31);
+		System.out.println(object + " -- " + object.out + " -- " + object.in);
+		*/
+		
+		for(int i=0; i<GraphObject.all.size(); i++) System.out.println(GraphObject.allid.get(i) + " -- " + GraphObject.allid.get(i).out);
+		System.out.println("");
+		
+		String input;
+		while(!(input = User.getString("Enter Query: ").toLowerCase()).equals("exit"))
+			new SimpleQuery(input);
 		
 	}
 

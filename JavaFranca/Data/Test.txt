@@ -1,12 +1,1 @@
-VERBS
-are
-made
-is
-inspired
-
-NOUNS
-album
-band
-
-POINTERS
-band - made - album
+Napoleon Bonaparte was a military and political leader of France.
