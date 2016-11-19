@@ -28,18 +28,6 @@ public class ZZZTesting {
 		
 		
 		// TEMPORARY TESTING STUFF
-		GraphObject object;
-		
-		/*
-		object = GraphObject.allid.get(44);
-		System.out.println(object + " -- " + object.out + " -- " + object.in);
-		object = GraphObject.allid.get(42);
-		System.out.println(object + " -- " + object.out + " -- " + object.in);
-		object = GraphObject.allid.get(43);
-		System.out.println(object + " -- " + object.out + " -- " + object.in);
-		object = GraphObject.allid.get(31);
-		System.out.println(object + " -- " + object.out + " -- " + object.in);
-		*/
 		
 		for(int i=0; i<GraphObject.all.size(); i++) System.out.println(GraphObject.allid.get(i) + " -- " + GraphObject.allid.get(i).out);
 		System.out.println("");
