@@ -1,35 +1,19 @@
 package GraphStructure;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Verb {
-	
+public class Verb extends GraphObject {
+
 	public static HashMap<String, Verb> all = new HashMap<String, Verb>();
-	public static Verb get(String string) {return all.get(string);}
-	
-	String name;
-	ArrayList<ArrayList<String>> tenses = new ArrayList<ArrayList<String>>();
-	
-	public Verb(String name) {
-		this.name = name;
-		for(int i=0; i<3; i++)
-			tenses.add(new ArrayList<String>());
+
+	protected Verb(String string){
+		super(string);
 		all.put(this.name, this);
 	}
-	
-	public String toString() {return name;}
-	
-	public boolean equals(Object that) {
-		if(that instanceof Verb) if(this.is((Verb)that)) return true;
-		if(that instanceof String) if(this.is((String) that)) return true;
-		return false;}
-	private boolean is(Verb that) {return this.is(that.name);}
-	private boolean is(String that) {
-		if(this.name.equals(that)) return true;
-		for(ArrayList<String> tense: tenses)
-			if(tense.contains(that))
-				return true;
-		return false;
+
+	//Creates a new instance of a GraphObject if it doesn't already exist
+	public static Verb create(String name) {
+		if(GraphObject.all.containsKey(name)) return all.get(name);
+		else return new Verb(name);
 	}
 
 }

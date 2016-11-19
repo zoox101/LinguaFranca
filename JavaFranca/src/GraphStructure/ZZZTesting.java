@@ -11,60 +11,25 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import ThoughtDivision.Thought;
+import ZZZOld.Save;
+import ZZZOld.User;
 
 @SuppressWarnings("unused")
-public class ZZZTest {
+public class ZZZTesting {
 	
 	//Algorithm
 	//Remove all verbs
 	
 	public static void main(String[] args) throws IOException {
 		
-		Save.fromFile("megafile.txt");
+		//Save.fromFile("megafile.txt");
 		
-		BufferedReader reader = new BufferedReader(new FileReader("Bonaparte.txt"));
-		ArrayList<String> strings = new ArrayList<String>(); String line;
-		while((line = reader.readLine()) != null) strings.add(line); reader.close();
-		
-		//Splitting the paragraph by sentences and by commas
-		strings = split(strings, "\\.");
-		strings = split(strings, ",");
-		
-		//Removing all dependent clauses
-		ArrayList<String> stringstemp = new ArrayList<String>();
-		for(String string: strings) {
-			if(contains(string, Verb.all.keySet()))
-				stringstemp.add(string.toLowerCase().trim());
-		}
-		strings = stringstemp;
-		
-		//
-		for(String string: strings) {
-			Thought thought = new Thought(string);
-			if(thought.size() < 4)
-				System.out.println(thought);
-		}		
-		
-	}
+		GraphObject obj = new Verb("testing");
+		System.out.println(obj.getClass().toString());
 	
-	static boolean contains(String string, Set<String> set) {
-		String[] split = string.split(" ");
-		for(int i=0; i<split.length; i++)
-			if(set.contains(split[i]))
-				return true;
-		return false;
+		
 	}
-	
-	static ArrayList<String> split(ArrayList<String> strings, String splitstring) throws IOException {
-		ArrayList<String> outputs = new ArrayList<String>();
-		for(String string: strings) {
-			String[] split = string.split(splitstring);
-			for(int i=0; i<split.length; i++)
-				outputs.add(split[i]);
-		}
-		return outputs;
-	}
+
 	
 	//Manual
 	static void verbHunt(String filein, String fileout) throws IOException {
@@ -93,16 +58,18 @@ public class ZZZTest {
 		for(String string: checked)
 			new Verb(string);
 		
-		Save.toFile(fileout);
+		//Save.toFile(fileout);
 		reader.close();
 	}
 	
+	/*
 	static void connect(String subject, String verb, String object) {
 		Noun subjectobj = Noun.get(subject);
 		Verb verbobj = Verb.get(verb);
 		Noun objectobj = Noun.get(object);
 		subjectobj.addConnection(verbobj, objectobj);
 		}
+	*/
 	
 	static String[] parse(String string) {
 		
