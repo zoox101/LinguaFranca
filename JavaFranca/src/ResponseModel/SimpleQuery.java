@@ -33,12 +33,12 @@ public class SimpleQuery {
 			}
 		}
 		
-		System.out.println(max);
-		System.out.println(maxobject + " -- " + maxobject.in + " -- " + maxobject.out );
+		System.out.println("HITS:\t" + max);
+		System.out.println("FOUND:\t" + maxobject + " -- " + maxobject.in + " -- " + maxobject.out );
 		
 		GraphObject thought = maxobject.getOut(Relation.OBJ).get(0);
 		GraphObject subject = thought.getIn(Relation.SUBJ).get(0);
-		System.out.println(subject.queryIn(Relation.UUU, null));
+		System.out.println("ANSWER:\t" + subject.queryIn(Relation.UUU, null));
 		
 	}
 	

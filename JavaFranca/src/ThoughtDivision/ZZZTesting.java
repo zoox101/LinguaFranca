@@ -45,8 +45,10 @@ public class ZZZTesting {
 		System.out.println("");
 		
 		String input;
-		while(!(input = User.getString("Enter Query: ").toLowerCase()).equals("exit"))
+		while(!(input = User.getString("Enter Query: ").toLowerCase()).equals("exit")) {
 			new SimpleQuery(input);
+			System.out.println("");
+		}
 		
 	}
 
