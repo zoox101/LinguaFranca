@@ -2,18 +2,18 @@ package GraphStructure;
 
 public class SuperPointer {
 	
-	Noun in;
-	Noun out;
-	Verb verb;
+	public GraphObject in;
+	public GraphObject out;
+	public Relation relation;
 	
-	SuperPointer(Noun in, Verb verb, Noun out) {
+	SuperPointer(GraphObject in, Relation relation, GraphObject out) {
 		this.in = in;
-		this.verb = verb; 
+		this.relation = relation; 
 		this.out = out;
 	}
 	
 	public String toString() {
-		return verb + ": " + out.name;
+		return relation + ": " + out.name;
 	}
-
+	
 }

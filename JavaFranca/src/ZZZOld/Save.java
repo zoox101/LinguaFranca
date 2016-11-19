@@ -1,11 +1,18 @@
-package GraphStructure;
+package ZZZOld;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import GraphStructure.Noun;
+import GraphStructure.SuperPointer;
+import GraphStructure.Verb;
+
+@SuppressWarnings("unused")
 public class Save {
+	
+	/*
 	
 	public static void toFile(String filename) throws IOException {
 		
@@ -46,8 +53,10 @@ public class Save {
 				subject.addConnection(verb, object);
 			}
 		}
-		
+				
 		reader.close();
 	}
+	
+	*/
 
 }

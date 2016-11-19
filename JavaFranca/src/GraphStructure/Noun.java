@@ -1,32 +1,19 @@
 package GraphStructure;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Noun {
-	
+public class Noun extends GraphObject {
+
 	public static HashMap<String, Noun> all = new HashMap<String, Noun>();
-	public static Noun get(String string) {return all.get(string);}
-	
-	ArrayList<SuperPointer> in;
-	ArrayList<SuperPointer> out;
-	
-	public String name;
-	
-	public Noun(String name) {
-		this.name = name;
-		this.in = new ArrayList<SuperPointer>();
-		this.out = new ArrayList<SuperPointer>();
+
+	protected Noun(String string) {
+		super(string); 
 		all.put(this.name, this);
 	}
-	
-	public boolean addConnection(Verb verb, Noun graphobject) {
-		SuperPointer pointer = new SuperPointer(this, verb, graphobject);
-		graphobject.in.add(pointer);
-		return out.add(pointer);
-	}
-	
-	public String toString() {
-		return name;
+
+	//Creates a new instance of a GraphObject if it doesn't already exist
+	public static Noun create(String name) {
+		if(GraphObject.all.containsKey(name)) return all.get(name);
+		else return new Noun(name);
 	}
 
 }
