@@ -1,4 +1,4 @@
-package ThoughtDivision;
+package ParseFromFile;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

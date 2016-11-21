@@ -1,4 +1,4 @@
-package ThoughtDivision;
+package ParseFromFile;
 import java.util.ArrayList;
 import java.util.Set;
 
