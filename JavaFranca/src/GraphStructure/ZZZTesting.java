@@ -16,26 +16,25 @@ import ZZZOld.User;
 
 @SuppressWarnings("unused")
 public class ZZZTesting {
-	
+
 	//Algorithm
 	//Remove all verbs
-	
+
 	public static void main(String[] args) throws IOException {
-		
+
 		//Save.fromFile("megafile.txt");
-		
 		GraphObject obj = new Verb("testing");
 		System.out.println(obj.getClass().toString());
-	
-		
+
+
 	}
 
-	
+
 	//Manual
 	static void verbHunt(String filein, String fileout) throws IOException {
-		
+
 		BufferedReader reader = new BufferedReader(new FileReader(filein));
-		
+
 		HashSet<String> verbs = new HashSet<String>();
 		String line; 
 		while((line = reader.readLine()) != null) {
@@ -47,7 +46,7 @@ public class ZZZTesting {
 					verbs.add(split[i]);
 			}
 		}
-		
+
 		System.out.println("Confirm Verbs");
 		ArrayList<String> verbarraylist = new ArrayList<String>();
 		verbarraylist.addAll(verbs);
@@ -57,11 +56,11 @@ public class ZZZTesting {
 				checked.add(string);
 		for(String string: checked)
 			new Verb(string);
-		
+
 		//Save.toFile(fileout);
 		reader.close();
 	}
-	
+
 	/*
 	static void connect(String subject, String verb, String object) {
 		Noun subjectobj = Noun.get(subject);
@@ -69,35 +68,35 @@ public class ZZZTesting {
 		Noun objectobj = Noun.get(object);
 		subjectobj.addConnection(verbobj, objectobj);
 		}
-	*/
-	
+	 */
+
 	static String[] parse(String string) {
-		
+
 		string = string.toLowerCase();
 		int verbposition = -1;
 		String[] arraysplit = string.split(" ");
 		for(int i=0; i<arraysplit.length; i++)
 			if(Verb.all.containsKey(arraysplit[i]))
 				verbposition = i;
-		
+
 		//Creating subject
 		String subject = "";
 		for(int i=0; i<verbposition; i++)
 			subject += (arraysplit[i] + " ");
 		subject = subject.trim();
-		
+
 		//Creating verb
 		String verb = arraysplit[verbposition];
-		
+
 		//Creating object
 		String object = "";
 		for(int i=verbposition+1; i<arraysplit.length; i++)
 			object += (arraysplit[i] + " ");
 		object = object.trim();
-		
+
 		String[] output = {subject, verb, object};
 		return output;
-		
+
 	}
-	
+
 }
