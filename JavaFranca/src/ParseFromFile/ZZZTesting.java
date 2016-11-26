@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Draw.Draw;
 import GraphStructure.GraphObject;
 import GraphStructure.Relation;
 import ResponseModel.SimpleQuery;
@@ -31,6 +32,8 @@ public class ZZZTesting {
 		
 		for(int i=0; i<GraphObject.all.size(); i++) System.out.println(GraphObject.allid.get(i) + " -- " + GraphObject.allid.get(i).out);
 		System.out.println("");
+		
+		new Draw(GraphObject.all.get("31"));
 		
 		String input;
 		while(!(input = User.getString("Enter Query: ").toLowerCase()).equals("exit")) {
