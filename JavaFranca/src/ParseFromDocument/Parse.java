@@ -1,4 +1,4 @@
-package ParseFromFile;
+package ParseFromDocument;
 import java.util.ArrayList;
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package ParseFromFile;
+package ParseFromDocument;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,14 +26,12 @@ public class ZZZTesting {
 		reader.close();
 		new Parse(strings);
 		
-		
-		
 		// TEMPORARY TESTING STUFF
 		
 		for(int i=0; i<GraphObject.all.size(); i++) System.out.println(GraphObject.allid.get(i) + " -- " + GraphObject.allid.get(i).out);
 		System.out.println("");
 		
-		new Draw(GraphObject.all.get("31"));
+		new Draw(GraphObject.all.get("napoleon"));
 		
 		String input;
 		while(!(input = User.getString("Enter Query: ").toLowerCase()).equals("exit")) {

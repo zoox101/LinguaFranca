@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import GraphStructure.GraphObject;
-import GraphStructure.Relation;
 import GraphStructure.SuperPointer;
 
 public class Draw extends JPanel {
 	private static final long serialVersionUID = 2786164773919222989L;
 
 	public static int DISPLAY = 1000;
-	public static int RADIUS = 10;
+	public static int RADIUS = 30;
+	public static int XDIST = RADIUS*DISPLAY/(8*30);
+	public static int YDIST = RADIUS*DISPLAY/(12*30);
 
 	public GraphObject startobject;
 
@@ -32,11 +33,9 @@ public class Draw extends JPanel {
 		super.paintComponent(g);
 		g.setColor(Color.BLACK);
 
-		System.out.println("Hit");
-		
 		ArrayList<ArrayList<GraphObject>> allrows = new ArrayList<ArrayList<GraphObject>>();
 		allrows.add(new ArrayList<GraphObject>()); allrows.get(0).add(startobject);
-		
+
 		for(int i=0; i<allrows.size(); i++) {
 			//Creating the next row
 			ArrayList<GraphObject> nextrow = new ArrayList<GraphObject>();
@@ -48,12 +47,36 @@ public class Draw extends JPanel {
 			//If the row isn't empty, iterate again
 			if(!nextrow.isEmpty()) allrows.add(nextrow);
 		}
+
+		//Drawing Lines
+		g.setColor(Color.BLACK);
+		for(int i=0; i<allrows.size()-1; i++)
+			for(int c1=0; c1<allrows.get(i).size(); c1++)
+				for(int c2=0; c2<allrows.get(i+1).size(); c2++) {
+					GraphObject node = allrows.get(i).get(c1);
+					GraphObject target = allrows.get(i+1).get(c2);
+					for(SuperPointer point: node.out)
+						if(point.out.equals(target)) {
+							int x1 = 2*RADIUS + XDIST*i;
+							int y1 = 2*RADIUS + YDIST*c1;
+							int x2 = 2*RADIUS + XDIST*(i+1);
+							int y2 = 2*RADIUS + YDIST*c2;
+							g.drawLine(x1, y1, x2, y2);
+						}
+				}
 		
-		int ydist = DISPLAY/allrows.size();
+		//Drawing Nodes
+		//Rows
 		for(int i=0; i<allrows.size(); i++) {
-			int xdist = DISPLAY/allrows.get(i).size();
-			for(int j=0; j<allrows.get(i).size(); j++)
-				g.drawOval(ydist*i, xdist*j, 2*RADIUS, 2*RADIUS);
+			//Columns
+			for(int j=0; j<allrows.get(i).size(); j++) {
+				int xpoint = RADIUS + XDIST*i;
+				int ypoint = RADIUS + YDIST*j;
+				g.setColor(Color.CYAN);
+				g.fillOval(xpoint, ypoint, 2*RADIUS, 2*RADIUS);
+				g.setColor(Color.BLACK);
+				g.drawString(allrows.get(i).get(j).name, xpoint+RADIUS/4, ypoint+3*RADIUS/4);
+			}
 		}
 
 		/*
@@ -84,7 +107,7 @@ public class Draw extends JPanel {
 		}
 		 */
 	}
-	
+
 	//Checks if the graph object is contained in the recursive arraylist
 	private boolean contains(ArrayList<ArrayList<GraphObject>> rows, GraphObject object) {
 		for(ArrayList<GraphObject> row: rows)
