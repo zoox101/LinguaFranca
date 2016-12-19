@@ -1,7 +1,6 @@
 package ParseFromDocument;
 import java.util.ArrayList;
 import java.util.Set;
-
 import GraphStructure.GraphObject;
 import GraphStructure.Relation;
 import GraphStructure.Verb;

@@ -1,0 +1,35 @@
+NAME: ~POF (~POF Params[ALL] & ~IOF "Name")
+FIND: POF (POF Params[ALL] & IOF "Name")	//Find object given a name
+FIND: EOF (ADJ Params[1] & IOF Params[2]) 	//Find object given adjective
+
+Napoleon POF [1]
+Bonaparte POF [1]
+Name IOF [1]
+[1] POF [2]
+[2] ADJ [3]
+Father POF Son
+Son POF Father
+Father IOF [3]
+Carlo POF [4]
+Buonaparte POF [5]
+Name IOF [5]
+[5] POF [4]
+[4] EOF [3]
+
+POF (POF Napoleon & POF Bonaparte & IOF Name)
+
+
+
+Keywords:
+
+IOF - Instance of
+POF - Part of
+EOF - Is
+SUBJ - Subject
+VERB - Verb
+OBJ - Object
+ADJ - Adjective
+
+ALL - AND all
+ANY - OR ALL
+Params - All unused parameters

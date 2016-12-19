@@ -1,0 +1,13 @@
+Napoleon POF [1]
+Bonaparte POF [1]
+Name IOF [1]
+[1] POF [2]
+[2] ADJ [3]
+Father POF Son
+Son POF Father
+Father IOF [3]
+Carlo POF [4]
+Buonaparte POF [5]
+Name IOF [5]
+[5] POF [4]
+[4] EOF [3]
