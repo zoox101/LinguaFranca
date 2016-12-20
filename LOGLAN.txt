@@ -2,7 +2,21 @@ NAME: ~POF (~POF Params[ALL] & ~IOF "Name")	//Find a name given an object
 FIND: POF (POF Params[ALL] & IOF "Name")	//Find object given a name
 FIND: EOF (ADJ Params[1] & IOF Params[2]) 	//Find object given adjective
 
-TEST: POF (IOF VAR & EOF X)
+FUNCTION
+|     \
+NAME   EXP0
+       |   \
+       EOF  PAREN----
+            |     \   \
+            EXP1   &   EXP2
+	    |   \      |   \
+	    ADJ  P[1]  EOF  P[2] 
+
+Language Rules:
+START -> NAME + RULE
+NAME -> STRING + ": "
+RULE -> SYMBOL + RULE | "(" + RULE + (CAT + RULE)* + ")"
+CAT -> "&" | "|"
 
 Napoleon POF [1]
 Bonaparte POF [1]
@@ -18,14 +32,7 @@ Name IOF [5]
 [5] POF [4]
 [4] EOF [3]
 
-Language Rules:
-START -> NAME + RULE
-NAME -> STRING + ": "
-RULE -> SYMBOL + RULE | "(" + RULE + CAT + RULE + ")"
-CAT -> "&" | "|"
-
 Keywords:
-
 IOF - Instance of
 POF - Part of
 EOF - Is
@@ -33,7 +40,6 @@ SUBJ - Subject
 VERB - Verb
 OBJ - Object
 ADJ - Adjective
-
 ALL - AND all
 ANY - OR ALL
 Params - All unused parameters
