@@ -1,4 +1,4 @@
-package ParseFromFile;
+package LOGLAN;
 import java.io.IOException;
 
 import Draw.Draw;
@@ -8,8 +8,10 @@ public class ZZZTesting {
 
 	public static void main(String[] args) throws IOException {
 				
-		new GraphFromFile("Data/SimpleNapoleon.txt"); 
-		new Draw(GraphObject.create("Son"));
+		//new GraphFromFile("Data/SimpleNapoleon.txt"); 
+		//new Draw(GraphObject.create("Son"));
+		
+		new Function("NAME: ~POF (~POF Params[ALL] & ~IOF Name)");
 		
 	}
 }

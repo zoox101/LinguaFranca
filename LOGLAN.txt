@@ -1,6 +1,8 @@
-NAME: ~POF (~POF Params[ALL] & ~IOF "Name")
+NAME: ~POF (~POF Params[ALL] & ~IOF "Name")	//Find a name given an object
 FIND: POF (POF Params[ALL] & IOF "Name")	//Find object given a name
 FIND: EOF (ADJ Params[1] & IOF Params[2]) 	//Find object given adjective
+
+TEST: POF (IOF VAR & EOF X)
 
 Napoleon POF [1]
 Bonaparte POF [1]
@@ -16,9 +18,11 @@ Name IOF [5]
 [5] POF [4]
 [4] EOF [3]
 
-POF (POF Napoleon & POF Bonaparte & IOF Name)
-
-
+Language Rules:
+START -> NAME + RULE
+NAME -> STRING + ": "
+RULE -> SYMBOL + RULE | "(" + RULE + CAT + RULE + ")"
+CAT -> "&" | "|"
 
 Keywords:
 

@@ -1,6 +1,7 @@
 package GraphStructure;
 import java.util.HashMap;
 
+@Deprecated
 public class Noun extends GraphObject {
 
 	public static HashMap<String, Noun> all = new HashMap<String, Noun>();
