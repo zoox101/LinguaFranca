@@ -1,21 +1,22 @@
 package LOGLAN;
 import java.io.IOException;
-
 import Draw.Draw;
 import GraphStructure.GraphObject;
+import GraphStructure.Relation;
+import LOGLAN.MicroFunction.Type;
 
+@SuppressWarnings("unused")
 public class ZZZTesting {
 
 	public static void main(String[] args) throws IOException {
-				
-		//new GraphFromFile("Data/SimpleNapoleon.txt"); 
-		//new Draw(GraphObject.create("Son"));
 		
-		//new Function("NAME: ~POF (~POF Params[ALL] & ~IOF Name)");
+		//new Draw(GraphObject.create("Napoleon"));
+		ParseMain.fromFile("Data/SimpleNapoleon.txt"); 
+		run("NAME (~EOF (ADJ (FIND 'Napoleon') & IOF 'Father'))");
 		
-		String[] strings = Function.parenthetical("asdf (adsfas (asdf asdf) asdfasdf asdfasdf)");
-		System.out.println(strings[0] + "--" + strings[1]);
-		
-		
+	}
+	
+	public static void run(String string) {
+		System.out.println(MicroFunction.execute(string));
 	}
 }

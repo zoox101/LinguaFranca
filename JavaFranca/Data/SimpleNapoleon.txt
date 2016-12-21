@@ -6,8 +6,13 @@ Name IOF [1]
 Father POF Son
 Son POF Father
 Father IOF [3]
-Carlo POF [4]
+Carlo POF [5]
 Buonaparte POF [5]
 Name IOF [5]
 [5] POF [4]
 [4] EOF [3]
+
+FIND: POF (POF PARAM & IOF 'Name')
+NAME: ~POF (~POF PARAM & IOF 'Name')
+
+NAME (~EOF (ADJ (FIND 'Napoleon') & IOF 'Father'))

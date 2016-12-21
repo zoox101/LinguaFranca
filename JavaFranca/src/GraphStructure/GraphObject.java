@@ -26,7 +26,7 @@ public class GraphObject {
 	public static GraphObject create() {
 		return new GraphObject(String.valueOf(idtotal));
 	}
-	
+
 	//Creates a new instance of a GraphObject if it doesn't already exist
 	public static GraphObject create(String name) {
 		if(GraphObject.all.containsKey(name)) return all.get(name);
@@ -39,42 +39,42 @@ public class GraphObject {
 		graphobject.in.add(pointer);
 		return out.add(pointer);
 	}
-	
+
 	//Returns any inputs with the given relation
-	public ArrayList<GraphObject> getIn(Relation relation) {
+	public ArrayList<GraphObject> getUp(Relation relation) {
 		ArrayList<GraphObject> inputs = new ArrayList<GraphObject>();
 		for(SuperPointer pointer: this.in)
 			if(pointer.relation == relation)
 				inputs.add(pointer.in);
 		return inputs;
 	}
-	
+
 	//Returns any outputs with the given relation
-	public ArrayList<GraphObject> getOut(Relation relation) {
+	public ArrayList<GraphObject> getDown(Relation relation) {
 		ArrayList<GraphObject> outputs = new ArrayList<GraphObject>();
 		for(SuperPointer pointer: this.out)
 			if(pointer.relation == relation)
 				outputs.add(pointer.out);
 		return outputs;
 	}
-	
+
 	//Recursive method that finds all nodes connected by the given relation
-		public ArrayList<GraphObject> queryIn(Relation relation, ArrayList<GraphObject> objects) {
-			if(objects == null) objects = new ArrayList<GraphObject>();
-			objects.add(this);
-			for (SuperPointer pointer: this.in)
-				if(pointer.relation == relation)
-					objects = pointer.in.queryIn(relation, objects);
-			return objects;
-		}
-	
+	public ArrayList<GraphObject> searchDown(Relation relation, ArrayList<GraphObject> objects) {
+		if(objects == null) objects = new ArrayList<GraphObject>();
+		objects.add(this);
+		for (SuperPointer pointer: this.in)
+			if(pointer.relation == relation)
+				objects = pointer.in.searchDown(relation, objects);
+		return objects;
+	}
+
 	//Recursive method that finds all nodes connected by the given relation
-	public ArrayList<GraphObject> queryOut(Relation relation, ArrayList<GraphObject> objects) {
+	public ArrayList<GraphObject> searchUp(Relation relation, ArrayList<GraphObject> objects) {
 		if(objects == null) objects = new ArrayList<GraphObject>();
 		objects.add(this);
 		for (SuperPointer pointer: this.out)
 			if(pointer.relation == relation)
-				objects = pointer.out.queryOut(relation, objects);
+				objects = pointer.out.searchUp(relation, objects);
 		return objects;
 	}
 

@@ -1,6 +1,24 @@
-NAME: ~POF (~POF Params[ALL] & ~IOF "Name")	//Find a name given an object
-FIND: POF (POF Params[ALL] & IOF "Name")	//Find object given a name
-FIND: EOF (ADJ Params[1] & IOF Params[2]) 	//Find object given adjective
+NAME: ~POF (~POF Params[ALL] & ~IOF 'Name')	//Find a name given an object
+FIND: POF (POF Params[ALL] & IOF 'Name')	//Find object given a name
+FIND: ~EOF (ADJ Params[1] & IOF Params[2]) 	//Find object given adjective
+
+Who was Napoleon's father?
+"~POF (~POF (~EOF (ADJ (POF (POF 'Napoleon' & IOF 'Name')) & IOF 'Father')) & IOF 'Name')"
+
+NAME: ~POF (~POF PARAM & IOF 'Name')
+FIND: POF (POF PARAM & IOF 'Name')
+
+TODO: FIX EOF Protocol && Add duplet
+
+
+NAME (ADJ (FIND 'Napoleon' & FIND 'Bonaparte') & IOF 'Father')
+
+NAME[ADJ (FIND['Napoleon'] & FIND['Bonaparte]) & IOF 'Father']
+
+NAME[~EOF (ADJ FIND['Napoleon','Bonaparte'] & IOF 'Father')]
+NAME (~EOF (ADJ (FIND ('Napoleon' 'Bonaparte)) & IOF 'Father))
+
+
 
 FUNCTION
 |     \
@@ -10,13 +28,21 @@ NAME   EXP0
             |     \   \
             EXP1   &   EXP2
 	    |   \      |   \
-	    ADJ  P[1]  EOF  P[2] 
+	    ADJ  P[1]  EOF  P[2]
+
+0: NAME			FIND 	1
+1: PARENTHETICAL	EOF 	2
+2: CONCATENATION	AND 	3	4
+3: DUPLET		ADJ 	5
+4: DUPLET		IOF 	6
+5: ATOM			Params[1]
+6: ATOM			Params[2]
 
 Language Rules:
 START -> NAME + RULE
 NAME -> STRING + ": "
-RULE -> SYMBOL + RULE | "(" + RULE + (CAT + RULE)* + ")"
-CAT -> "&" | "|"
+RULE -> SYMBOL + RULE | "(" + RULE + CAT + ")"
+CAT -> "&" + RULE | "|" + RULE | CAT + CAT
 
 Napoleon POF [1]
 Bonaparte POF [1]
@@ -40,6 +66,9 @@ SUBJ - Subject
 VERB - Verb
 OBJ - Object
 ADJ - Adjective
+
+AND - Both sets contain
+OR - One set contains
 ALL - AND all
 ANY - OR ALL
 Params - All unused parameters

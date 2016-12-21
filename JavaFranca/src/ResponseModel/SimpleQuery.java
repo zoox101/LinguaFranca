@@ -18,7 +18,7 @@ public class SimpleQuery {
 		
 		HashMap<GraphObject, Integer> tally = new HashMap<GraphObject, Integer>();
 		for(GraphObject object: objects) {
-			ArrayList<GraphObject> synonyms = object.queryOut(Relation.UUU, null);
+			ArrayList<GraphObject> synonyms = object.searchDown(Relation.UUU, null);
 			for(GraphObject synonym: synonyms) {
 				if(!tally.containsKey(synonym)) tally.put(synonym, 1);
 				else tally.put(synonym, tally.get(synonym)+1);
@@ -36,9 +36,9 @@ public class SimpleQuery {
 		System.out.println("HITS:\t" + max);
 		System.out.println("FOUND:\t" + maxobject + " -- " + maxobject.in + " -- " + maxobject.out );
 		
-		GraphObject thought = maxobject.getOut(Relation.OBJ).get(0);
-		GraphObject subject = thought.getIn(Relation.SUBJ).get(0);
-		System.out.println("ANSWER:\t" + subject.queryIn(Relation.UUU, null));
+		GraphObject thought = maxobject.getDown(Relation.OBJ).get(0);
+		GraphObject subject = thought.getUp(Relation.SUBJ).get(0);
+		System.out.println("ANSWER:\t" + subject.searchUp(Relation.UUU, null));
 		
 	}
 	
