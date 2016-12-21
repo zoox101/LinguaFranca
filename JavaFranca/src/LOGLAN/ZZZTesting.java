@@ -12,7 +12,7 @@ public class ZZZTesting {
 		
 		//new Draw(GraphObject.create("Napoleon"));
 		ParseMain.fromFile("Data/SimpleNapoleon.txt");
-		run("NAME (FIND ('Napoleon'))");
+		run("~POF (FIND 'Bonaparte' & FIND 'Napoleon')");
 		
 	}
 	
