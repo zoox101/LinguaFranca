@@ -11,8 +11,8 @@ public class ZZZTesting {
 	public static void main(String[] args) throws IOException {
 		
 		//new Draw(GraphObject.create("Napoleon"));
-		ParseMain.fromFile("Data/SimpleNapoleon.txt"); 
-		run("NAME (~EOF (ADJ (FIND 'Napoleon') & IOF 'Father'))");
+		ParseMain.fromFile("Data/SimpleNapoleon.txt");
+		run("NAME (FIND ('Napoleon'))");
 		
 	}
 	

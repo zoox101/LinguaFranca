@@ -34,7 +34,7 @@ public class MicroFunction {
 			this.string = split[0];
 			this.func1 = new MicroFunction(split[1]);
 			if(MicroFunction.all.containsKey(this.string)) {
-				this.func1 = MicroFunction.all.get(this.string);
+				this.func1 = MicroFunction.getCopy(this.string);
 				this.replaceParam(split[1]);
 			}
 		}
@@ -51,7 +51,7 @@ public class MicroFunction {
 			this.string = split[0];
 			this.func1 = new MicroFunction(split[1]);
 			if(MicroFunction.all.containsKey(this.string)) {
-				this.func1 = MicroFunction.all.get(this.string);
+				this.func1 = MicroFunction.getCopy(this.string);
 				this.replaceParam(split[1]);
 			}
 		}
@@ -59,6 +59,15 @@ public class MicroFunction {
 		if(type == Type.ATOM) {
 			this.string = string;
 		}
+	}
+	
+	//Copy constructor
+	private MicroFunction(MicroFunction that) {
+		this.id = idcounter++;
+		this.type = that.type;
+		this.string = that.string;
+		if(that.func1 != null) this.func1 = new MicroFunction(that.func1);
+		if(that.func2 != null) this.func2 = new MicroFunction(that.func2);
 	}
 		
 	//Replacing all instances of PARAM
@@ -80,7 +89,7 @@ public class MicroFunction {
 	public static GraphList execute(String string) {
 		String[] split = string.split(" ");
 		if(split.length == 1)
-			return MicroFunction.all.get(string).execute();
+			return MicroFunction.getCopy(string).execute();
 		else {
 			MicroFunction function = new MicroFunction(string);
 			return function.execute();
@@ -148,6 +157,12 @@ public class MicroFunction {
 			if(string.charAt(i) == character && location == Integer.MAX_VALUE)
 				location = i;
 		return location;
+	}
+	
+	//Copies the MicroFunction from the HashMap
+	private static MicroFunction getCopy(String string) {
+		MicroFunction function = MicroFunction.all.get(string);
+		return new MicroFunction(function);
 	}
 
 	//Pulls off the header
