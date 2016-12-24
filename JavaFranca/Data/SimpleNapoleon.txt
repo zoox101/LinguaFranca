@@ -14,5 +14,4 @@ Name IOF [5]
 
 FIND: POF (POF PARAM & IOF 'Name')
 NAME: ~POF (~POF PARAM & IOF 'Name')
-
-TEST: NAME (~EOF (ADJ (FIND 'Napoleon') & IOF 'Father'))
+NAME (~EOF (ADJ (FIND 'Napoleon') & IOF 'Father'))

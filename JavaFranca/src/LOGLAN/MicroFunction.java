@@ -1,7 +1,7 @@
 package LOGLAN;
 import java.util.HashMap;
 
-
+//Parses and compiles LOGLAN function strings
 public class MicroFunction {
 
 	public enum Type {NAME, PARENTHETICAL, CONCATENATION, DUPLET, ATOM};
@@ -17,10 +17,14 @@ public class MicroFunction {
 
 	//Creates a new MicroFunction from a string
 	public MicroFunction(String string) {
+		
+		//Basic sanitization
+		while(length(string) == 1 && string.charAt(0) == '(' && string.charAt(string.length()-1) == ')')
+			string = string.substring(1, string.length()-1);
 
 		this.id = idcounter++;
 		this.type = identify(string);
-		//System.out.println(string + " -- " + type);
+		//System.out.println(string + " -- " + type); //DEBUG
 
 		if(type == Type.NAME) {
 			String[] split = name(string);
@@ -49,10 +53,11 @@ public class MicroFunction {
 		if(type == Type.DUPLET) {
 			String[] split = string.split(" ");
 			this.string = split[0];
-			this.func1 = new MicroFunction(split[1]);
+			String secondparam = string.substring(split[0].length()+1);
+			this.func1 = new MicroFunction(secondparam);
 			if(MicroFunction.all.containsKey(this.string)) {
 				this.func1 = MicroFunction.getCopy(this.string);
-				this.replaceParam(split[1]);
+				this.replaceParam(secondparam);
 			}
 		}
 
@@ -87,9 +92,12 @@ public class MicroFunction {
 
 	//Executes the function given by the string
 	public static GraphList execute(String string) {
+		//System.out.println(string);
 		String[] split = string.split(" ");
+		//Given a name, return it
 		if(split.length == 1)
 			return MicroFunction.getCopy(string).execute();
+		//Given a command, execute it
 		else {
 			MicroFunction function = new MicroFunction(string);
 			return function.execute();
@@ -119,7 +127,7 @@ public class MicroFunction {
 
 	//Identifies the next operation to parse
 	private static Type identify(String string) {
-
+		
 		if(length(string) == 1)
 			return Type.ATOM;
 		else if(length(string) != 2) {
@@ -134,9 +142,11 @@ public class MicroFunction {
 
 	//Returns the length of the given function
 	private static int length(String string) {
-		int counter = 1;
+		int counter = 1; boolean counting = true;
 		for(int i=0; i<string.length(); i++) {
-			if(string.charAt(i) == ' ')
+			if(string.charAt(i) == '\'')
+				counting = !counting;
+			if(string.charAt(i) == ' ' && counting)
 				counter++;
 			else if(string.charAt(i) == '(') {
 				int parencount = 1;

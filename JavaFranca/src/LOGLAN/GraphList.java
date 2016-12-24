@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import GraphStructure.GraphObject;
 import GraphStructure.Relation;
 
+//Executes a Microfunction
 public class GraphList extends ArrayList<GraphObject> {
 	private static final long serialVersionUID = -9209999960520471413L;
 
@@ -37,13 +38,13 @@ public class GraphList extends ArrayList<GraphObject> {
 			command = command.substring(1, command.length());
 			Relation relation = Relation.valueOf(command);
 			for(GraphObject object: set1)
-				newlist.addAll(object.getUp(relation));
+				newlist.addAll(object.getDown(relation));
 		}
 		//Searching down
 		else {
 			Relation relation = Relation.valueOf(command);
 			for(GraphObject object: set1)
-				newlist.addAll(object.getDown(relation));
+				newlist.addAll(object.getUp(relation));
 		}
 		
 		return newlist;

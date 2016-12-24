@@ -29,6 +29,7 @@ public class GraphObject {
 
 	//Creates a new instance of a GraphObject if it doesn't already exist
 	public static GraphObject create(String name) {
+		if(name == null) return create();
 		if(GraphObject.all.containsKey(name)) return all.get(name);
 		else return new GraphObject(name);
 	}
@@ -89,9 +90,9 @@ public class GraphObject {
 
 	//Converts the graph object to a string
 	public String toString() {
-		String classname = this.getClass().toString();
-		String[] cnamesplit = classname.split("\\.");
-		return cnamesplit[cnamesplit.length-1] + "," + name;
+		//String classname = this.getClass().toString();
+		//String[] cnamesplit = classname.split("\\.");
+		return name; //cnamesplit[cnamesplit.length-1] + "," + name;
 	}
 
 	//Gets an appropriate graph object from a string

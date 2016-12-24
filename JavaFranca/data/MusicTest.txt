@@ -1,0 +1,65 @@
+songs POF albums
+bands make albums
+bands make songs
+'number 1 hit' IOF songs
+
+'the beatles' IOF bands
+'the beatles' IOF rock
+'the beatles' IOF english
+'the beatles' from Liverpool
+'the beatles' from 1960
+
+'abby road' IOF albums
+'the beatles' make 'abby road'
+'let it be' IOF albums
+'the beatles' make 'let it be'
+'rubber soul' IOF albums
+'the beatles' make 'rubber soul'
+'sgt peppers lonely hearts club band' IOF album
+'the beatles' make 'sgt peppers lonely hearts club band'
+
+'john lennon' POF 'the beatles'
+'paul mccartney' POF 'the beatles'
+'george harrison' POF 'the beatles'
+'ringo starr' POF 'the beatles'
+
+'john lennon' POF 'quarrymen'
+'quarrymen' EOF 'the beatles'
+
+'please please me' IOF 'number 1 hit'
+'please please me' IOF 'songs'
+'the beatles' make 'please please me'
+
+'beatlemania' POF 'the beatles'
+'the beatles' POF 'the british invasion'
+
+'rolling stones' IOF 'bands'
+'rolling stones' IOF 'rock'
+'rolling stones' IOF 'english'
+'rolling stones' IOF 'blues'
+
+'rolling stones' from 1962
+'rolling stones' from london
+'rolling stones' POF 'the british invasion'
+
+'mick jagger' POF 'rolling stones'
+'keith richards' POF 'rolling stones'
+'brian jones' POF 'rolling stones'
+'ian stewart' POF 'rolling stones'
+'bill wyman' POF 'rolling stones'
+'charlie watts' POF 'rolling stones'
+
+'rolling stones' make 'their satanic majesties request'
+'their satanic majesties request' IOF albums
+
+'rolling stones' make 'beggars banquet'
+'beggars banquet' IOF albums
+'rolling stones' make 'let it bleed'
+'let it bleed' IOF albums
+'rolling stones' make 'sticky fingers'
+'sticky fingers' IOF albums
+'rolling stones' make 'exile on main st'
+'exile on main st' IOF albums
+
+
+

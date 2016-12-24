@@ -1,24 +1,9 @@
-NAME: ~POF (~POF Params[ALL] & ~IOF 'Name')	//Find a name given an object
-FIND: POF (POF Params[ALL] & IOF 'Name')	//Find object given a name
-FIND: ~EOF (ADJ Params[1] & IOF Params[2]) 	//Find object given adjective
-
 Who was Napoleon's father?
 "~POF (~POF (~EOF (ADJ (POF (POF 'Napoleon' & IOF 'Name')) & IOF 'Father')) & IOF 'Name')"
 
-NAME: ~POF (~POF PARAM & IOF 'Name')
 FIND: POF (POF PARAM & IOF 'Name')
-
-TODO: FIX EOF Protocol && Add duplet
-
-
-NAME (ADJ (FIND 'Napoleon' & FIND 'Bonaparte') & IOF 'Father')
-
-NAME[ADJ (FIND['Napoleon'] & FIND['Bonaparte]) & IOF 'Father']
-
-NAME[~EOF (ADJ FIND['Napoleon','Bonaparte'] & IOF 'Father')]
-NAME (~EOF (ADJ (FIND ('Napoleon' 'Bonaparte)) & IOF 'Father))
-
-
+NAME: ~POF (~POF PARAM & IOF 'Name')
+NAME (~EOF (ADJ (FIND 'Napoleon') & IOF 'Father'))
 
 FUNCTION
 |     \
@@ -71,4 +56,8 @@ AND - Both sets contain
 OR - One set contains
 ALL - AND all
 ANY - OR ALL
-Params - All unused parameters
+PARAM - Funtion parameters
+
+Direction:
+The Beatles -- IOF --> Bands
+Paris -- POF --> France

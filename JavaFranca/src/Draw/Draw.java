@@ -11,21 +11,19 @@ import GraphStructure.SuperPointer;
 public class Draw extends JPanel {
 	private static final long serialVersionUID = 2786164773919222989L;
 
-	public static int DISPLAY = 1000;
-	public static int RADIUS = 30;
-	public static int XDIST = RADIUS*DISPLAY/(8*30);
-	public static int YDIST = RADIUS*DISPLAY/(12*30);
+	public int DISPLAY = 1000;
+	public int RADIUS = 30;
+	public int XDIST = RADIUS*DISPLAY/(8*30);
+	public int YDIST = RADIUS*DISPLAY/(12*30);
 
 	public GraphObject startobject;
 
 	public Draw(GraphObject object) {
-
 		super();
 		JFrame frame = new JFrame();
 		frame.add(this); frame.setVisible(true); frame.setSize(DISPLAY, DISPLAY);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.startobject = object;
-
 	}
 
 	protected void paintComponent(Graphics g) {
