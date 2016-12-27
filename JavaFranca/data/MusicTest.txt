@@ -23,8 +23,8 @@ bands make songs
 'george harrison' POF 'the beatles'
 'ringo starr' POF 'the beatles'
 
-'john lennon' POF 'quarrymen'
 'quarrymen' EOF 'the beatles'
+'the beatles' EOF 'quarrymen'
 
 'please please me' IOF 'number 1 hit'
 'please please me' IOF 'songs'
@@ -60,6 +60,4 @@ bands make songs
 'sticky fingers' IOF albums
 'rolling stones' make 'exile on main st'
 'exile on main st' IOF albums
-
-
 

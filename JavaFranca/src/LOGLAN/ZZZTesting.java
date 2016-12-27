@@ -1,5 +1,7 @@
 package LOGLAN;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import Draw.Draw;
 import GraphStructure.GraphObject;
 import GraphStructure.Relation;
@@ -11,19 +13,21 @@ public class ZZZTesting {
 
 	public static void main(String[] args) throws IOException {
 		
-		//new Draw(GraphObject.create("Napoleon"));
-		//ParseMain.fromFile("Data/SimpleNapoleon.txt");
-		
-		//(IOF 'albums' | IOF 'songs') & OBJ (~SUBJ 'the beatles' & ~VERB 'made')
-		
 		ParseMain.fromFile("data/MusicTest.txt");
-		//draw("let it be", 30);
 		
+		ArrayList<GraphObject> objects = new ArrayList<GraphObject>();
+		GraphObject object = GraphObject.create("the beatles");
+		
+		//draw("the beatles");
+		run("POF 'the beatles'");
+		
+		/*
 		String string = User.getString("Query: ");
 		while(!string.toLowerCase().trim().equals("exit")) {
 			run(string);
 			string = User.getString("Query: ");
 		}
+		*/
 
 	}
 	
@@ -36,7 +40,7 @@ public class ZZZTesting {
 			System.out.println(MicroFunction.execute(string));
 	}
 	
-	public static void draw(String string, int value) {
+	public static void draw(String string) {
 		Draw draw = new Draw(GraphObject.create(string));
 	}
 }

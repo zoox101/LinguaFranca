@@ -60,6 +60,7 @@ public class GraphObject {
 	}
 
 	//Recursive method that finds all nodes connected by the given relation
+	//Call with object.searchDown(relation, null)
 	public ArrayList<GraphObject> searchDown(Relation relation, ArrayList<GraphObject> objects) {
 		if(objects == null) objects = new ArrayList<GraphObject>();
 		objects.add(this);
@@ -70,8 +71,10 @@ public class GraphObject {
 	}
 
 	//Recursive method that finds all nodes connected by the given relation
+	//Call with object.searchUp(relation, null)
 	public ArrayList<GraphObject> searchUp(Relation relation, ArrayList<GraphObject> objects) {
 		if(objects == null) objects = new ArrayList<GraphObject>();
+		if(objects.contains(this)) return objects;
 		objects.add(this);
 		for (SuperPointer pointer: this.out)
 			if(pointer.relation == relation)

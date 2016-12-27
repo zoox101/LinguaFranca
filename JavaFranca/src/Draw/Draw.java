@@ -12,7 +12,7 @@ public class Draw extends JPanel {
 	private static final long serialVersionUID = 2786164773919222989L;
 
 	public int DISPLAY = 1000;
-	public int RADIUS = 30;
+	public int RADIUS = 20;
 	public int XDIST = RADIUS*DISPLAY/(8*30);
 	public int YDIST = RADIUS*DISPLAY/(12*30);
 

@@ -96,6 +96,7 @@ public class MicroFunction {
 		String[] split = string.split(" ");
 		//Given a name, return it
 		if(split.length == 1)
+			//Returns a new MicroFunction from the string
 			return MicroFunction.getCopy(string).execute();
 		//Given a command, execute it
 		else {
