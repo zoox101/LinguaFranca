@@ -1,12 +1,10 @@
 package LOGLAN;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import Draw.Draw;
 import GraphStructure.GraphObject;
 import GraphStructure.Relation;
 import LOGLAN.MicroFunction.Type;
-import ZZZOld.User;
 
 @SuppressWarnings("unused")
 public class ZZZTesting {
@@ -19,7 +17,7 @@ public class ZZZTesting {
 		//GraphObject object = GraphObject.create("to be");
 		//System.out.println(object.searchUp(Relation.EOF, null));
 		
-		//draw("the beatles");
+		draw("the beatles");
 		//run("IOF 'noun'");
 				
 		/*

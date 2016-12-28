@@ -47,6 +47,7 @@ public class ETLRules extends ArrayList<String> {
 
 	@Override
 	public boolean add(String string) {
+		if(string.length() == 0) return false;
 		super.add(string);
 		rules.add(string.split(" -> ")[0].split(" \\+ "));
 		results.add(string.split(" -> ")[1].split(" \\+ "));

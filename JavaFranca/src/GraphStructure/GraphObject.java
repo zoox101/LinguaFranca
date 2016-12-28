@@ -111,18 +111,7 @@ public class GraphObject {
 
 	//Converts the graph object to a string
 	public String toString() {
-		//String classname = this.getClass().toString();
-		//String[] cnamesplit = classname.split("\\.");
-		return name; //cnamesplit[cnamesplit.length-1] + "," + name;
-	}
-
-	//Gets an appropriate graph object from a string
-	public static GraphObject fromString(String string) {
-		String[] strings = string.split(",");
-		if(strings[0].equals("GraphObject")) return new GraphObject(strings[1]);
-		if(strings[0].equals("Noun")) return new Noun(strings[1]);
-		if(strings[0].equals("Verb")) return new Verb(strings[1]);
-		return null;
+		return name;
 	}
 
 }
