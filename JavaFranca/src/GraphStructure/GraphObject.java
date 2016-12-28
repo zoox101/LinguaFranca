@@ -36,6 +36,7 @@ public class GraphObject {
 
 	//Adds a connection to another graph object
 	public void addConnection(Relation relation, GraphObject graphobject) {
+		System.out.println("Triplet: " + this + " " + relation + " " + graphobject); //DEBUGGING
 		//Add pointer one direction
 		SuperPointer pointer = new SuperPointer(this, relation, graphobject);
 		graphobject.in.add(pointer);
@@ -47,9 +48,39 @@ public class GraphObject {
 			this.in.add(eofpointer);
 		}
 	}
+	
+	//Gets all the EOFS to a given object
+	public ArrayList<GraphObject> eSet() {return this.searchUp(Relation.EOF, null);}
+	public static ArrayList<GraphObject> eSet(ArrayList<GraphObject> list) {
+		ArrayList<GraphObject> newlist = new ArrayList<GraphObject>();
+		for(GraphObject object: list) { 
+			ArrayList<GraphObject> currentsearch = object.searchUp(Relation.EOF, null);
+			for(GraphObject searchobject: currentsearch)
+				if(!newlist.contains(searchobject))
+					newlist.add(searchobject);
+		}
+		return newlist;
+	}
+	
+	//Gets all the objects of that relation in the equivalence set
+	public ArrayList<GraphObject> getUp(Relation relation) {
+		
+		if(relation == Relation.EOF) return this.eSet();
+		
+		ArrayList<GraphObject> allobjects = new ArrayList<GraphObject>();
+		//Searches over the entire equivalence set
+		ArrayList<GraphObject> eset = this.eSet();
+		for(GraphObject object: eset) {
+			ArrayList<GraphObject> relationset = object.singleUp(relation);
+			for(GraphObject relationobject: relationset)
+				if(!allobjects.contains(relationobject))
+					allobjects.add(relationobject);
+		}
+		return allobjects;
+	}
 
 	//Returns any inputs with the given relation
-	public ArrayList<GraphObject> getUp(Relation relation) {
+	private ArrayList<GraphObject> singleUp(Relation relation) {
 		
 		if(relation == Relation.IOF || relation == Relation.POF) 
 			return searchUp(relation, null);
@@ -60,23 +91,10 @@ public class GraphObject {
 				inputs.add(pointer.in);
 		return inputs;
 	}
-
-	//Returns any outputs with the given relation
-	public ArrayList<GraphObject> getDown(Relation relation) {
-		
-		if(relation == Relation.IOF || relation == Relation.POF)
-			return searchUp(relation, null);
-				
-		ArrayList<GraphObject> outputs = new ArrayList<GraphObject>();
-		for(SuperPointer pointer: this.out)
-			if(pointer.relation == relation)
-				outputs.add(pointer.out);
-		return outputs;
-	}
-
+	
 	//Recursive method that finds all nodes connected by the given relation
 	//Call with object.searchUp(relation, null)
-	public ArrayList<GraphObject> searchUp(Relation relation, ArrayList<GraphObject> objects) {
+	private ArrayList<GraphObject> searchUp(Relation relation, ArrayList<GraphObject> objects) {
 		if(objects == null) objects = new ArrayList<GraphObject>();
 		if(objects.contains(this)) return objects;
 		objects.add(this);
@@ -86,9 +104,39 @@ public class GraphObject {
 		return objects;
 	}
 	
+	//Gets all the objects of that relation in the equivalence set
+	public ArrayList<GraphObject> getDown(Relation relation) {
+		
+		if(relation == Relation.EOF) return this.eSet();
+		
+		ArrayList<GraphObject> allobjects = new ArrayList<GraphObject>();
+		//Looks over entire equivalence set
+		ArrayList<GraphObject> eset = this.eSet();
+		for(GraphObject object: eset) {
+			ArrayList<GraphObject> relationset = object.singleDown(relation);
+			for(GraphObject relationobject: relationset)
+				if(!allobjects.contains(relationobject))
+					allobjects.add(relationobject);
+		}
+		return allobjects;
+	}
+
+	//Returns any outputs with the given relation
+	private ArrayList<GraphObject> singleDown(Relation relation) {
+		
+		if(relation == Relation.IOF || relation == Relation.POF)
+			return searchDown(relation, null);
+				
+		ArrayList<GraphObject> outputs = new ArrayList<GraphObject>();
+		for(SuperPointer pointer: this.out)
+			if(pointer.relation == relation)
+				outputs.add(pointer.out);
+		return outputs;
+	}
+	
 	//Recursive method that finds all nodes connected by the given relation
 	//Call with object.searchDown(relation, null)
-	public ArrayList<GraphObject> searchDown(Relation relation, ArrayList<GraphObject> objects) {
+	private ArrayList<GraphObject> searchDown(Relation relation, ArrayList<GraphObject> objects) {
 		if(objects == null) objects = new ArrayList<GraphObject>();
 		if(objects.contains(this)) return objects;
 		objects.add(this);

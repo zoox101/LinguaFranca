@@ -37,7 +37,7 @@ public class ETLRules extends ArrayList<String> {
 	}
 
 	//Applies rules to the text in a file
-	public void executeFile(String filename) throws IOException {
+	public void readFile(String filename) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(filename));
 		String line; String corpus = "";
 		while((line = reader.readLine()) != null) corpus += line;
@@ -68,7 +68,7 @@ public class ETLRules extends ArrayList<String> {
 
 	//Runs a single rule on a single sentence
 	private void execute(String[] rule, String[] result, String sentence) {
-
+		
 		ArrayList<String> memory = new ArrayList<String>();
 		String[] words = sentence.split(" ");
 		int rulecount = 0; String word = "";
@@ -201,11 +201,8 @@ public class ETLRules extends ArrayList<String> {
 		//Creating triplets from matrix
 		for(String subject: triplet.get(0))
 			for(String verb: triplet.get(1))
-				for(String object: triplet.get(2)) {
-					System.out.println("Triplet: " + subject + " " + verb + " " + object);
+				for(String object: triplet.get(2)) 
 					new Triplet(subject + " " + verb + " " + object);
-				}
-		
 	}
 
 }

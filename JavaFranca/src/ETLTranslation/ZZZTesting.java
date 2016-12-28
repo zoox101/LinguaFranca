@@ -1,16 +1,24 @@
 package ETLTranslation;
 import java.io.IOException;
 import java.util.ArrayList;
-import LOGLAN.ParseMain;
+
+import GraphStructure.GraphObject;
+import LOGLAN.LOGLAN;
+import ResponseModel.User;
 
 @SuppressWarnings("unused")
 public class ZZZTesting {
 	
 	public static void main(String[] args) throws IOException {
-		
-		ParseMain.fromFile("data/MusicAbstract.txt");
+				
+		/* */
+		LOGLAN.fromFile("data/ETLTest/Dictionary.txt");
+		LOGLAN.fromFile("data/ETLTest/MusicAbstract.txt");
 		ETLRules rules = ETLRules.fromFile("data/ETLTest/ETLRules.txt");
-		rules.executeFile("data/ETLTest/MusicSimple.txt");
+		rules.readFile("data/ETLTest/MusicSimple.txt");
+		/* */
+		
+		while(true) System.out.println(LOGLAN.parse(User.getString("Query: ")));
 				
 	}
 

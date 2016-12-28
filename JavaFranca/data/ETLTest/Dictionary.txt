@@ -1,0 +1,20 @@
+pronoun IOF noun
+
+'to be' IOF verb
+am EOF 'to be'
+are EOF 'to be'
+is EOF 'to be'
+was EOF 'to be'
+were EOF 'to be'
+
+song IOF noun
+band IOF noun
+album IOF noun
+genre IOF noun
+
+English IOF adjective
+rock IOF adjective
+
+they IOF pronoun
+a EOF an
+

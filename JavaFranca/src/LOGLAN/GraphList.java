@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import GraphStructure.GraphObject;
 import GraphStructure.Relation;
 
-//Executes a Microfunction
+//Executes a MicroFunction
 public class GraphList extends ArrayList<GraphObject> {
 	private static final long serialVersionUID = -9209999960520471413L;
 
@@ -11,8 +11,11 @@ public class GraphList extends ArrayList<GraphObject> {
 	public GraphList(String string) {
 		super();
 		GraphObject object = GraphObject.create(string);
-		this.addAll(object.searchUp(Relation.EOF, null));
+		this.addAll(object.eSet());
 	}
+	
+	//Creates a GraphList from an ArrayList<GraphObject>
+	public GraphList(ArrayList<GraphObject> objects) {this.addAll(objects);}
 
 	//Creates a new empty GraphSet
 	public GraphList() {super();}
@@ -49,16 +52,7 @@ public class GraphList extends ArrayList<GraphObject> {
 				newlist.addAll(object.getUp(relation));			
 		}
 
-		//Running EOF on all objects
-		GraphList returnlist = new GraphList();
-		for(GraphObject object: newlist) { 
-			ArrayList<GraphObject> currentsearch = object.searchUp(Relation.EOF, null);
-			for(GraphObject searchobject: currentsearch)
-				if(!returnlist.contains(searchobject))
-					returnlist.add(searchobject);
-		}
-
-		return returnlist;
+		return new GraphList(GraphObject.eSet(newlist));
 	}
 
 	//AND/OR sets together. EX: "'Bands' & 'English'"

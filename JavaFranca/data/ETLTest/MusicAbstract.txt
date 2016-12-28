@@ -1,0 +1,13 @@
+song EOF songs
+band EOF bands
+album EOF albums
+genre EOF genres
+
+songs IOF music
+songs POF albums
+bands make albums
+bands make songs
+band EOF bands
+
+genres POF music
+songs POF genres

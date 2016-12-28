@@ -5,42 +5,44 @@ import java.io.IOException;
 import java.util.ArrayList;
 import GraphStructure.Relation;
 
-public class ParseMain {
-
-	//Parses a number of strings
-	public ParseMain(ArrayList<String> strings) {
-		for(String string: strings)
-			identifyAndParse(string);
+public class LOGLAN {
+	
+	public static GraphList parse(String string) {
+		return LOGLAN.identifyAndParse(string);
 	}
 	
-	public ParseMain(String string) {
-		identifyAndParse(string);
+	public static ArrayList<GraphList> parse(ArrayList<String> strings) {
+		ArrayList<GraphList> outputs = new ArrayList<GraphList>();
+		for(String string: strings)
+			if(LOGLAN.identifyAndParse(string) != null)
+				outputs.add(LOGLAN.identifyAndParse(string));
+		return outputs;
 	}
 
-	public static ParseMain fromFile(String filename) throws IOException {
+	public static ArrayList<GraphList> fromFile(String filename) throws IOException {
 		//Getting strings from file
 		BufferedReader reader = new BufferedReader(new FileReader(filename));
 		ArrayList<String> lines = new ArrayList<String>(); String line;
 		while((line = reader.readLine()) != null)
 			lines.add(line.trim());
 		reader.close();
-		return new ParseMain(lines);
+		return parse(lines);
 	}
 
 	//Checks LOGLAN structure and executes appropriately
-	private void identifyAndParse(String string) {
-
+	private static GraphList identifyAndParse(String string) {
+		
 		//Skip empty lines
 		if(string.length() == 0);
 		//If the first word is a command parse a function
 		else if(firstWordIsCommand(string)) {
 			MicroFunction function = new MicroFunction(string);
 			//If unnamed, execute the function
-			if(!string.contains(":")) System.out.println(function.execute());
+			if(!string.contains(":")) return function.execute();
 		}
 		//If the first word is not a command, create a new triplet 
 		else new Triplet(string);
-		
+		return null;
 	}
 
 	//Checks to see if the string is part of the Relation Enum

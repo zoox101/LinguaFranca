@@ -11,13 +11,13 @@ public class ZZZTesting {
 
 	public static void main(String[] args) throws IOException {
 		
-		ParseMain.fromFile("data/MusicAbstract.txt");
+		LOGLAN.fromFile("data/MusicTest.txt");
 		
-		//ArrayList<GraphObject> objects = new ArrayList<GraphObject>();
-		//GraphObject object = GraphObject.create("to be");
-		//System.out.println(object.searchUp(Relation.EOF, null));
+		ArrayList<GraphObject> objects = new ArrayList<GraphObject>();
+		GraphObject object = GraphObject.create("bands");
+		System.out.println("Test: " + object.getDown(Relation.IOF));
 		
-		draw("the beatles");
+		//draw("the beatles");
 		//run("IOF 'noun'");
 				
 		/*

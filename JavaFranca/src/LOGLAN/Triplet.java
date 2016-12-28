@@ -28,7 +28,10 @@ public class Triplet {
 	private void simpleTriplet(String[] triplet) {
 		GraphObject subject = GraphObject.create(triplet[0]);
 		GraphObject object = GraphObject.create(triplet[2]);
-		subject.addConnection(Relation.valueOf(triplet[1]), object);
+		Relation relation = Relation.valueOf(triplet[1]);
+		//Prevents Duplication
+		if(!subject.getDown(relation).contains(object))
+			subject.addConnection(relation, object);
 	}
 	
 	//Handles strings without clearly defined connections
