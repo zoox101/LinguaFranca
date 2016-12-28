@@ -39,24 +39,14 @@ public class GraphList extends ArrayList<GraphObject> {
 		if(command.charAt(0) == '~') {
 			command = command.substring(1, command.length());
 			Relation relation = Relation.valueOf(command);
-
-			if(relation == Relation.IOF)
-				for(GraphObject object: set1)
-					newlist.addAll(object.searchDown(relation, null));
-			else
-				for(GraphObject object: set1)
-					newlist.addAll(object.getDown(relation));
+			for(GraphObject object: set1)
+				newlist.addAll(object.getDown(relation));
 		}
 		//Searching down
 		else {
 			Relation relation = Relation.valueOf(command);
-
-			if(relation == Relation.IOF)
-				for(GraphObject object: set1)
-					newlist.addAll(object.searchUp(relation, null));
-			else
-				for(GraphObject object: set1)
-					newlist.addAll(object.getUp(relation));			
+			for(GraphObject object: set1)
+				newlist.addAll(object.getUp(relation));			
 		}
 
 		//Running EOF on all objects

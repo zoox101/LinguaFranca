@@ -50,6 +50,9 @@ public class GraphObject {
 
 	//Returns any inputs with the given relation
 	public ArrayList<GraphObject> getUp(Relation relation) {
+		
+		if(relation == Relation.IOF || relation == Relation.POF) 
+			return searchUp(relation, null);
 				
 		ArrayList<GraphObject> inputs = new ArrayList<GraphObject>();
 		for(SuperPointer pointer: this.in)
@@ -60,6 +63,9 @@ public class GraphObject {
 
 	//Returns any outputs with the given relation
 	public ArrayList<GraphObject> getDown(Relation relation) {
+		
+		if(relation == Relation.IOF || relation == Relation.POF)
+			return searchUp(relation, null);
 				
 		ArrayList<GraphObject> outputs = new ArrayList<GraphObject>();
 		for(SuperPointer pointer: this.out)
