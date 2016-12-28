@@ -35,10 +35,17 @@ public class GraphObject {
 	}
 
 	//Adds a connection to another graph object
-	public boolean addConnection(Relation relation, GraphObject graphobject) {
+	public void addConnection(Relation relation, GraphObject graphobject) {
+		//Add pointer one direction
 		SuperPointer pointer = new SuperPointer(this, relation, graphobject);
 		graphobject.in.add(pointer);
-		return out.add(pointer);
+		this.out.add(pointer);
+		//If EOF relationship add pointer the other direction
+		if(relation == Relation.EOF) {
+			SuperPointer eofpointer = new SuperPointer(graphobject, relation, this);
+			graphobject.out.add(eofpointer);
+			this.in.add(eofpointer);
+		}
 	}
 
 	//Returns any inputs with the given relation
@@ -83,10 +90,12 @@ public class GraphObject {
 	}
 
 	//Decides if two graph objects are equal
-	//TODO: Make this equals method more robust
 	public boolean equals(Object that) {
 		if(that instanceof GraphObject)
-			if(((GraphObject) that).name == this.name)
+			if(this.name.equals(((GraphObject) that).name))
+				return true;
+		if(that instanceof String)
+			if(this.name.equals(that))
 				return true;
 		return false;
 	}

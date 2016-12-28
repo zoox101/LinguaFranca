@@ -48,13 +48,17 @@ public class GraphList extends ArrayList<GraphObject> {
 			for(GraphObject object: set1)
 				newlist.addAll(object.getUp(relation));
 		}
-		
+				
 		//Running EOF on all objects
 		GraphList returnlist = new GraphList();
-		for(GraphObject object: newlist)
-			returnlist.addAll(object.searchUp(Relation.EOF, null));
+		for(GraphObject object: newlist) { 
+			ArrayList<GraphObject> currentsearch = object.searchUp(Relation.EOF, null);
+			for(GraphObject searchobject: currentsearch)
+				if(!returnlist.contains(searchobject))
+					returnlist.add(searchobject);
+		}
 		
-		return newlist;
+		return returnlist;
 	}
 	
 	//AND/OR sets together. EX: "'Bands' & 'English'"
@@ -80,6 +84,15 @@ public class GraphList extends ArrayList<GraphObject> {
 		}
 			
 		return null;
+	}
+	
+	@Override
+	//Fixed the contains method. The default one was providing bad results. 
+	public boolean contains(Object that) {
+		for(GraphObject object: this)
+			if(object.equals(that))
+				return true;
+		return false;
 	}
 	
 	

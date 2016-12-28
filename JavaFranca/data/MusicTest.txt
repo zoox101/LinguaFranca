@@ -23,7 +23,6 @@ bands make songs
 'george harrison' POF 'the beatles'
 'ringo starr' POF 'the beatles'
 
-'quarrymen' EOF 'the beatles'
 'the beatles' EOF 'quarrymen'
 
 'please please me' IOF 'number 1 hit'

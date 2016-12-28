@@ -13,14 +13,15 @@ public class ZZZTesting {
 
 	public static void main(String[] args) throws IOException {
 		
-		ParseMain.fromFile("data/MusicTest.txt");
+		ParseMain.fromFile("data/MusicAbstract.txt");
 		
-		ArrayList<GraphObject> objects = new ArrayList<GraphObject>();
-		GraphObject object = GraphObject.create("the beatles");
+		//ArrayList<GraphObject> objects = new ArrayList<GraphObject>();
+		//GraphObject object = GraphObject.create("to be");
+		//System.out.println(object.searchUp(Relation.EOF, null));
 		
 		//draw("the beatles");
-		run("POF 'the beatles'");
-		
+		//run("IOF 'noun'");
+				
 		/*
 		String string = User.getString("Query: ");
 		while(!string.toLowerCase().trim().equals("exit")) {
