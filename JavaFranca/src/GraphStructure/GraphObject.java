@@ -50,6 +50,7 @@ public class GraphObject {
 
 	//Returns any inputs with the given relation
 	public ArrayList<GraphObject> getUp(Relation relation) {
+				
 		ArrayList<GraphObject> inputs = new ArrayList<GraphObject>();
 		for(SuperPointer pointer: this.in)
 			if(pointer.relation == relation)
@@ -59,6 +60,7 @@ public class GraphObject {
 
 	//Returns any outputs with the given relation
 	public ArrayList<GraphObject> getDown(Relation relation) {
+				
 		ArrayList<GraphObject> outputs = new ArrayList<GraphObject>();
 		for(SuperPointer pointer: this.out)
 			if(pointer.relation == relation)
@@ -67,25 +69,26 @@ public class GraphObject {
 	}
 
 	//Recursive method that finds all nodes connected by the given relation
-	//Call with object.searchDown(relation, null)
-	public ArrayList<GraphObject> searchDown(Relation relation, ArrayList<GraphObject> objects) {
-		if(objects == null) objects = new ArrayList<GraphObject>();
-		objects.add(this);
-		for (SuperPointer pointer: this.in)
-			if(pointer.relation == relation)
-				objects = pointer.in.searchDown(relation, objects);
-		return objects;
-	}
-
-	//Recursive method that finds all nodes connected by the given relation
 	//Call with object.searchUp(relation, null)
 	public ArrayList<GraphObject> searchUp(Relation relation, ArrayList<GraphObject> objects) {
 		if(objects == null) objects = new ArrayList<GraphObject>();
 		if(objects.contains(this)) return objects;
 		objects.add(this);
+		for (SuperPointer pointer: this.in)
+			if(pointer.relation == relation)
+				objects = pointer.in.searchUp(relation, objects);
+		return objects;
+	}
+	
+	//Recursive method that finds all nodes connected by the given relation
+	//Call with object.searchDown(relation, null)
+	public ArrayList<GraphObject> searchDown(Relation relation, ArrayList<GraphObject> objects) {
+		if(objects == null) objects = new ArrayList<GraphObject>();
+		if(objects.contains(this)) return objects;
+		objects.add(this);
 		for (SuperPointer pointer: this.out)
 			if(pointer.relation == relation)
-				objects = pointer.out.searchUp(relation, objects);
+				objects = pointer.out.searchDown(relation, objects);
 		return objects;
 	}
 

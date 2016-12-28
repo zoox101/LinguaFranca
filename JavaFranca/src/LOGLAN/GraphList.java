@@ -13,10 +13,10 @@ public class GraphList extends ArrayList<GraphObject> {
 		GraphObject object = GraphObject.create(string);
 		this.addAll(object.searchUp(Relation.EOF, null));
 	}
-	
+
 	//Creates a new empty GraphSet
 	public GraphList() {super();}
-	
+
 	//Handles atomic operations
 	public static GraphList execute(String command) {
 		//Remove parenthetical -- Ex: "'the beatles'" -> "the beatles"
@@ -25,30 +25,40 @@ public class GraphList extends ArrayList<GraphObject> {
 		else
 			return MicroFunction.execute(command);
 	}
-	
+
 	//Executes a command for a single set -- IOF, POF, SUBJ, etc...
 	public static GraphList execute(String command, GraphList set1) {
-		
+
 		if(command.equals("PARAM") || MicroFunction.all.containsKey(command))
 			return set1;
-		
+
 		//Creating a new list to store the data
 		GraphList newlist = new GraphList();
-		
+
 		//Searching up
 		if(command.charAt(0) == '~') {
 			command = command.substring(1, command.length());
 			Relation relation = Relation.valueOf(command);
-			for(GraphObject object: set1)
-				newlist.addAll(object.getDown(relation));
+
+			if(relation == Relation.IOF)
+				for(GraphObject object: set1)
+					newlist.addAll(object.searchDown(relation, null));
+			else
+				for(GraphObject object: set1)
+					newlist.addAll(object.getDown(relation));
 		}
 		//Searching down
 		else {
 			Relation relation = Relation.valueOf(command);
-			for(GraphObject object: set1)
-				newlist.addAll(object.getUp(relation));
+
+			if(relation == Relation.IOF)
+				for(GraphObject object: set1)
+					newlist.addAll(object.searchUp(relation, null));
+			else
+				for(GraphObject object: set1)
+					newlist.addAll(object.getUp(relation));			
 		}
-				
+
 		//Running EOF on all objects
 		GraphList returnlist = new GraphList();
 		for(GraphObject object: newlist) { 
@@ -57,13 +67,13 @@ public class GraphList extends ArrayList<GraphObject> {
 				if(!returnlist.contains(searchobject))
 					returnlist.add(searchobject);
 		}
-		
+
 		return returnlist;
 	}
-	
+
 	//AND/OR sets together. EX: "'Bands' & 'English'"
 	public static GraphList execute(String command, GraphList set1, GraphList set2) {
-		
+
 		//And sets together
 		if(command.equals("AND")) {
 			GraphList newlist = new GraphList();
@@ -72,7 +82,7 @@ public class GraphList extends ArrayList<GraphObject> {
 					newlist.add(object);
 			return newlist;
 		}
-		
+
 		//Or sets together
 		if(command.equals("OR")) {
 			GraphList newlist = new GraphList();
@@ -82,10 +92,10 @@ public class GraphList extends ArrayList<GraphObject> {
 					newlist.add(object);
 			return newlist;
 		}
-			
+
 		return null;
 	}
-	
+
 	@Override
 	//Fixed the contains method. The default one was providing bad results. 
 	public boolean contains(Object that) {
@@ -94,7 +104,7 @@ public class GraphList extends ArrayList<GraphObject> {
 				return true;
 		return false;
 	}
-	
-	
+
+
 
 }

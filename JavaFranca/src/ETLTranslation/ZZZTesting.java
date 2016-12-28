@@ -11,7 +11,7 @@ public class ZZZTesting {
 		ParseMain.fromFile("data/MusicAbstract.txt");
 		ETLRules rules = ETLRules.fromFile("data/ETLTest/ETLRules.txt");
 		rules.executeFile("data/ETLTest/MusicSimple.txt");
-		
+				
 	}
 
 }

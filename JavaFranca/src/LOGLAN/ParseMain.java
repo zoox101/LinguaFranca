@@ -12,6 +12,10 @@ public class ParseMain {
 		for(String string: strings)
 			identifyAndParse(string);
 	}
+	
+	public ParseMain(String string) {
+		identifyAndParse(string);
+	}
 
 	public static ParseMain fromFile(String filename) throws IOException {
 		//Getting strings from file
