@@ -23,10 +23,8 @@ public class GraphList extends ArrayList<GraphObject> {
 	//Handles atomic operations
 	public static GraphList execute(String command) {
 		//Remove parenthetical -- Ex: "'the beatles'" -> "the beatles"
-		if(command.charAt(0) == '\'')
-			return new GraphList(command.substring(1, command.length()-1));
-		else
-			return MicroFunction.execute(command);
+		if(command.charAt(0) == '\'') return new GraphList(command.substring(1, command.length()-1));
+		else return MicroFunction.execute(command);
 	}
 
 	//Executes a command for a single set -- IOF, POF, SUBJ, etc...
@@ -55,10 +53,10 @@ public class GraphList extends ArrayList<GraphObject> {
 		return new GraphList(GraphObject.eSet(newlist));
 	}
 
-	//AND/OR sets together. EX: "'Bands' & 'English'"
+	//AND-OR sets together. EX: "'Bands' & 'English'"
 	public static GraphList execute(String command, GraphList set1, GraphList set2) {
 
-		//And sets together
+		//AND sets together
 		if(command.equals("AND")) {
 			GraphList newlist = new GraphList();
 			for(GraphObject object: set1)
@@ -67,7 +65,7 @@ public class GraphList extends ArrayList<GraphObject> {
 			return newlist;
 		}
 
-		//Or sets together
+		//OR sets together
 		if(command.equals("OR")) {
 			GraphList newlist = new GraphList();
 			newlist.addAll(set1);

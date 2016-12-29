@@ -85,7 +85,7 @@ public class ETLRules extends ArrayList<String> {
 			if(rulecount == rule.length) break;
 			ArrayList<String> subrule = split(rule[rulecount]);
 
-			//System.out.println(subrule.get(0) + " -- " + word.trim());
+			//System.out.println(subrule.get(0) + " -- " + word.trim()); //DEBUGGING
 			//If the rule fits...
 			if(fits(subrule.get(0), word.trim())) {
 
@@ -161,7 +161,7 @@ public class ETLRules extends ArrayList<String> {
 		if(firstchar == '(') {
 			MicroFunction function = new MicroFunction(rule);
 			GraphList set = function.execute();
-			return set.contains(string);
+			return set.contains(string.toLowerCase());
 		}
 
 		//If the first character is "{" execute the JAVA function

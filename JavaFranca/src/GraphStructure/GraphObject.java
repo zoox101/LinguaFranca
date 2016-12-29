@@ -30,13 +30,14 @@ public class GraphObject {
 	//Creates a new instance of a GraphObject if it doesn't already exist
 	public static GraphObject create(String name) {
 		if(name == null) return create();
+		name = name.toLowerCase();
 		if(GraphObject.all.containsKey(name)) return all.get(name);
 		else return new GraphObject(name);
 	}
 
 	//Adds a connection to another graph object
 	public void addConnection(Relation relation, GraphObject graphobject) {
-		System.out.println("Triplet: " + this + " " + relation + " " + graphobject); //DEBUGGING
+		//System.out.println("Triplet: " + this + " " + relation + " " + graphobject); //DEBUGGING
 		//Add pointer one direction
 		SuperPointer pointer = new SuperPointer(this, relation, graphobject);
 		graphobject.in.add(pointer);

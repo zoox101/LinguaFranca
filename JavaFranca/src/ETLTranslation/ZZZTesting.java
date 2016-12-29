@@ -10,7 +10,10 @@ import ResponseModel.User;
 public class ZZZTesting {
 	
 	public static void main(String[] args) throws IOException {
-				
+			
+		//LOGLAN.parse("'the Beatles' IOF bands");
+		//System.out.println(LOGLAN.parse("~IOF 'The Beatles'"));
+		
 		/* */
 		LOGLAN.fromFile("data/ETLTest/Dictionary.txt");
 		LOGLAN.fromFile("data/ETLTest/MusicAbstract.txt");
